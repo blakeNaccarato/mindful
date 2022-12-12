@@ -27,6 +27,9 @@ max_complexity = 10
 
 ignore =
 
+    ; Trello JSON has non-conforming
+    N815,
+
     ; Conflict with black
     ; Whitespace before ''
     E203,
@@ -55,6 +58,10 @@ ignore =
     C408
 
 per-file-ignores =
+
+    src/trellens/model.py:
+        ; id is a common field
+        A003,
 
     tests/*:
         ; We indicate custom fixtures w/ ALL_CAPS to distinguish from other args

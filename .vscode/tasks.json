@@ -6,6 +6,19 @@
   "version": "2.0.0",
   "tasks": [
     // * -------------------------------------------------------------------------- * //
+    // * PROJECT-SPECIFIC * //
+    {
+      "label": "proj: Generate model",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-Command",
+        "trellens 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest/c1tDMXSa.json' src/trellens/model.py"
+      ],
+      "problemMatcher": []
+    },
+
+    // * -------------------------------------------------------------------------- * //
     // * GIT * //
     {
       "label": "git: Rebase back to fork",

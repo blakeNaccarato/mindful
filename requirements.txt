@@ -1,1 +1,3 @@
 # List project dependencies here. A workflow ports them to `pyproject.toml`. This is needed because Dependabot does not currently support `flit`-flavored `pyproject.toml`.
+datamodel-code-generator~=0.14.0
+typer~=0.7.0
