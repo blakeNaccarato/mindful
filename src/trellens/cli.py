@@ -1,5 +1,6 @@
 """CLI for Lens for Trello."""
 
+from datetime import UTC, date, datetime, time, timedelta
 from pathlib import Path
 
 from datamodel_code_generator import InputFileType, PythonVersion, generate
@@ -24,15 +25,28 @@ def generate_model(input_file: Path, output_file: Path):
 
 
 @app.command()
-def get_comments(boards: Path, board_name: str, card_name: str):
+def get_comments(
+    boards: Path,
+    board_name: str,
+    card_name: str,
+    limit_days: int = 0,
+):
     """Get comments from a card."""
     board = [board for board in load_boards(boards) if board.name == board_name][0]
     comment_actions_data = [
-        action.data for action in board.actions if action.type == "commentCard"
+        action for action in board.actions if action.type == "commentCard"
     ]
-    comment_actions_filtered = [
-        data.text
-        for data in comment_actions_data
-        if data.text and data.card and data.card.name and data.card.name == card_name
-    ]
-    pyperclip.copy("\n\n".join(comment_actions_filtered))
+    today = datetime.combine(date.today(), time.min).astimezone(UTC)
+    date_limit = today - timedelta(days=limit_days) if limit_days != 0 else None
+    filtered_comments = reversed(
+        [
+            action.data.text
+            for action in comment_actions_data
+            if action.data.text
+            and action.data.card
+            and action.data.card.name
+            and action.data.card.name == card_name
+            and (not date_limit or datetime.fromisoformat(action.date) > date_limit)
+        ]
+    )
+    pyperclip.copy("\n\n\n".join(filtered_comments))

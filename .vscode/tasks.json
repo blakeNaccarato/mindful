@@ -24,6 +24,12 @@
       "id": "card",
       "type": "promptString",
       "description": "card"
+    },
+    {
+      "id": "limit_days",
+      "type": "promptString",
+      "description": "limit_days",
+      "default": "0"
     }
   ],
   "tasks": [
@@ -35,7 +41,7 @@
       "command": "pwsh",
       "args": [
         "-Command",
-        "trellens get-comments 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest' '${input:board}' '${input:card}'"
+        "trellens get-comments 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest' '${input:board}' '${input:card}' --limit-days '${input:limit_days}'"
       ],
       "problemMatcher": []
     },

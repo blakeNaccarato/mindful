@@ -13,7 +13,9 @@
         "get-comments",
         "G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest",
         "Process data",
-        "Maintain the data process"
+        "Maintain the data process",
+        "--limit-days",
+        "7"
       ],
       "console": "internalConsole"
     },
