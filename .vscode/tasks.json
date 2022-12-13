@@ -4,16 +4,48 @@
 
 {
   "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "board",
+      "type": "pickString",
+      "description": "board",
+      "default": "",
+      "options": [
+        "Detect bubbles",
+        "Get a job",
+        "Keep up",
+        "Process data",
+        "Run experiment",
+        "Simulate bubbles",
+        "Write dissertation"
+      ]
+    },
+    {
+      "id": "card",
+      "type": "promptString",
+      "description": "card"
+    }
+  ],
   "tasks": [
     // * -------------------------------------------------------------------------- * //
     // * PROJECT-SPECIFIC * //
+    {
+      "label": "proj: Get comments from task",
+      "type": "process",
+      "command": "pwsh",
+      "args": [
+        "-Command",
+        "trellens get-comments 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest' '${input:board}' '${input:card}'"
+      ],
+      "problemMatcher": []
+    },
     {
       "label": "proj: Generate model",
       "type": "process",
       "command": "pwsh",
       "args": [
         "-Command",
-        "trellens 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest/c1tDMXSa.json' src/trellens/model.py"
+        "trellens generate-model 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest/c1tDMXSa.json' src/trellens/model.py"
       ],
       "problemMatcher": []
     },

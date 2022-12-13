@@ -2,6 +2,22 @@
   "version": "0.2.0",
   "configurations": [
     // * -------------------------------------------------------------------------- * //
+    // * PROJECT-SPECIFIC * //
+    {
+      "name": "CLI: Get comments",
+      "cwd": "${workspaceFolder}",
+      "type": "python",
+      "request": "launch",
+      "module": "trellens",
+      "args": [
+        "get-comments",
+        "G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest",
+        "Process data",
+        "Maintain the data process"
+      ],
+      "console": "internalConsole"
+    },
+    // * -------------------------------------------------------------------------- * //
     // * GENERAL * //
     {
       "name": "Python: Current file",

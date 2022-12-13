@@ -222,7 +222,7 @@ class Prefs(BaseModel):
     calendar_feed_enabled: bool = Field(..., alias="calendarFeedEnabled")
     hidden_plugin_board_buttons: List = Field(..., alias="hiddenPluginBoardButtons")
     switcher_views: List[SwitcherView] = Field(..., alias="switcherViews")
-    background: str
+    background: str | None
     background_color: Any = Field(..., alias="backgroundColor")
     background_image: str = Field(..., alias="backgroundImage")
     background_image_scaled: List[BackgroundImageScaledItem] = Field(
@@ -289,7 +289,7 @@ class Card(BaseModel):
 
 
 class Prefs1(BaseModel):
-    background: str
+    background: str | None
 
 
 class Board(BaseModel):
@@ -319,7 +319,7 @@ class ListModel(BaseModel):
 
 
 class Prefs2(BaseModel):
-    background: str
+    background: str | None
 
 
 class Old(BaseModel):
@@ -353,7 +353,7 @@ class CheckItem(BaseModel):
     id: str
     name: str
     state: str
-    text_data: TextData1 = Field(..., alias="textData")
+    text_data: TextData1 | None = Field(None, alias="textData")
 
 
 class ListBefore(BaseModel):
@@ -568,7 +568,7 @@ class Label(BaseModel):
     id: str
     id_board: str = Field(..., alias="idBoard")
     name: str
-    color: str
+    color: Optional[str]
 
 
 class PerCard3(BaseModel):
@@ -660,7 +660,7 @@ class PluginDatum(BaseModel):
     id_model: str = Field(..., alias="idModel")
     value: str
     access: str
-    date_last_updated: str = Field(..., alias="dateLastUpdated")
+    date_last_updated: str | None = Field(None, alias="dateLastUpdated")
 
 
 class Card1(BaseModel):
@@ -674,7 +674,7 @@ class Card1(BaseModel):
     due_complete: bool = Field(..., alias="dueComplete")
     date_last_activity: str = Field(..., alias="dateLastActivity")
     desc: str
-    desc_data: DescData = Field(..., alias="descData")
+    desc_data: DescData | None = Field(None, alias="descData")
     due: Any
     due_reminder: Optional[int] = Field(..., alias="dueReminder")
     email: str
@@ -797,7 +797,7 @@ class NameData(BaseModel):
 class CheckItem1(BaseModel):
     id: str
     name: str
-    name_data: NameData = Field(..., alias="nameData")
+    name_data: NameData | None = Field(None, alias="nameData")
     pos: float
     due: Any
     due_reminder: Any = Field(..., alias="dueReminder")
@@ -832,7 +832,7 @@ class PluginDatum1(BaseModel):
     id_model: str = Field(..., alias="idModel")
     value: str
     access: str
-    date_last_updated: str = Field(..., alias="dateLastUpdated")
+    date_last_updated: str | None = Field(None, alias="dateLastUpdated")
 
 
 class Model(BaseModel):
@@ -863,9 +863,9 @@ class Model(BaseModel):
     ix_update: str = Field(..., alias="ixUpdate")
     template_gallery: Any = Field(..., alias="templateGallery")
     enterprise_owned: bool = Field(..., alias="enterpriseOwned")
-    id_board_source: str = Field(..., alias="idBoardSource")
+    id_board_source: str | None = Field(None, alias="idBoardSource")
     premium_features: List[str] = Field(..., alias="premiumFeatures")
-    id_member_creator: str = Field(..., alias="idMemberCreator")
+    id_member_creator: str | None = Field(None, alias="idMemberCreator")
     actions: List[Action]
     cards: List[Card1]
     labels: List[Label1]
