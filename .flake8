@@ -59,7 +59,7 @@ ignore =
 
 per-file-ignores =
 
-    src/trellens/model.py:
+    src/trellens/board.py:
         ; id is a common field
         A003,
 

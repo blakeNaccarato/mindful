@@ -438,7 +438,7 @@ class Data(BaseModel):
     attachment: Attachment | None = None
     list: ListModel | None = None
     old: Old | None = None
-    text: str | None = None
+    text: str = ""
     text_data: TextData | None = Field(None, alias="textData")
     date_last_edited: str | None = Field(None, alias="dateLastEdited")
     checklist: Checklist | None = None

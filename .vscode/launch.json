@@ -4,6 +4,15 @@
     // * -------------------------------------------------------------------------- * //
     // * PROJECT-SPECIFIC * //
     {
+      "name": "CLI: Generate report",
+      "cwd": "${workspaceFolder}",
+      "type": "python",
+      "request": "launch",
+      "module": "trellens",
+      "args": ["generate-report"],
+      "console": "internalConsole"
+    },
+    {
       "name": "CLI: Get comments",
       "cwd": "${workspaceFolder}",
       "type": "python",
@@ -13,8 +22,7 @@
         "get-comments",
         "Process data",
         "Maintain the data process",
-        "--limit-days",
-        "7"
+        "--limit-days=7"
       ],
       "console": "internalConsole"
     },

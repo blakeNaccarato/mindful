@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from pydantic import BaseModel, DirectoryPath, Field
+from pydantic import BaseModel, DirectoryPath, Extra, Field
 import tomllib
 
 APPDIR = Path("~/.trellens").expanduser()
@@ -14,11 +14,22 @@ def init():
     generate_schema()
 
 
-class AppConfig(BaseModel):
+class MyBaseModel(BaseModel):
+    class Config:
+        """Model configuration"""
+
+        extra = Extra.forbid  # To forbid extra fields
+
+
+class AppConfig(MyBaseModel):
     """Application configuration."""
 
     boards: DirectoryPath = Field(
         ..., description="Directory containing exported Trello baords."
+    )
+    skip_boards: list[str] | None = Field(None, description="Boards IDs to skip.")
+    reports: DirectoryPath = Field(
+        ..., description="Directory to store generated reports."
     )
 
 

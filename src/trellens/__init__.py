@@ -6,6 +6,6 @@ more.
 
 __version__ = "0.0.0"
 
-from trellens.config import init
+from trellens.configs import init
 
 init()

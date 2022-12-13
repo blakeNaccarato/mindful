@@ -1,42 +1,60 @@
-"""CLI for Lens for Trello."""
+"""CLI"""
 
-from datetime import UTC, date, datetime, time, timedelta
+from datetime import datetime
 from pathlib import Path
 
 from datamodel_code_generator import InputFileType, PythonVersion, generate
 import pyperclip
 from typer import Typer
 
-from trellens.defaults import boards
+from trellens import api, configs
+from trellens.defaults import boards, config
 
 app = Typer()
+
+now = datetime.now()
+REPORT = Path(
+    config.reports / f"{now.replace(microsecond=0).isoformat().replace(':', '-')}.md"
+)
+
+
+@app.command()
+def generate_report(days: int = 8, output: Path = REPORT):
+    """Generate a report from comments."""
+    report: str = ""
+    for board in boards:
+        comments = api.get_comments(board)
+        comments = api.filter_comments(comments, days=days)
+        cards = {
+            comment.data.card.name
+            for comment in comments
+            if comment.data.card and comment.data.card.name
+        }
+        comments_by_card = [api.filter_comments(comments, card=card) for card in cards]
+        comments_in_cards = {
+            card: api.sort_comments(comments)
+            for card, comments in zip(cards, comments_by_card)
+        }
+        if comments:
+            report += f"# {board.name}\n\n"
+        for card, comments in comments_in_cards.items():
+            comments = api.agg_comments(comments)
+            report += f"## {card}\n\n"
+            report += "\n\n".join([comment.data.text for comment in comments])
+            report += "\n\n"
+        output.write_text(report, encoding="utf-8")
 
 
 @app.command()
 def get_comments(
-    board_name: str,
-    card_name: str,
-    limit_days: int = 0,
+    board: str,
+    card: str,
+    days: int = 0,
 ):
     """Get comments from a card."""
-    board = [board for board in boards if board.name == board_name][0]
-    comment_actions_data = [
-        action for action in board.actions if action.type == "commentCard"
-    ]
-    today = datetime.combine(date.today(), time.min).astimezone(UTC)
-    date_limit = today - timedelta(days=limit_days) if limit_days != 0 else None
-    filtered_comments = reversed(
-        [
-            action.data.text
-            for action in comment_actions_data
-            if action.data.text
-            and action.data.card
-            and action.data.card.name
-            and action.data.card.name == card_name
-            and (not date_limit or datetime.fromisoformat(action.date) > date_limit)
-        ]
-    )
-    pyperclip.copy("\n\n\n".join(filtered_comments))
+    comments = api.get_comments([b for b in boards if b.name == board][0])
+    filtered_comments = api.filter_comments(comments, card, days)
+    pyperclip.copy("\n\n\n".join([comment.data.text for comment in filtered_comments]))
 
 
 # * -------------------------------------------------------------------------------- * #
@@ -53,3 +71,9 @@ def generate_model(input_file: Path, output_file: Path):
         snake_case_field=True,
         target_python_version=PythonVersion.PY_311,
     )
+
+
+@app.command()
+def generate_schema():
+    """Generate configuration schema."""
+    configs.generate_schema()

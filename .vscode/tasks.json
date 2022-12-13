@@ -26,9 +26,9 @@
       "description": "card"
     },
     {
-      "id": "limit_days",
+      "id": "days",
       "type": "promptString",
-      "description": "limit_days",
+      "description": "days",
       "default": "0"
     }
   ],
@@ -36,12 +36,19 @@
     // * -------------------------------------------------------------------------- * //
     // * PROJECT-SPECIFIC * //
     {
+      "label": "proj: Generate report",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-Command", "trellens generate-report --days=7"],
+      "problemMatcher": []
+    },
+    {
       "label": "proj: Get comments from task",
       "type": "process",
       "command": "pwsh",
       "args": [
         "-Command",
-        "trellens get-comments '${input:board}' '${input:card}' --limit-days '${input:limit_days}'"
+        "trellens get-comments '${input:board}' '${input:card}' --days=${input:days}"
       ],
       "problemMatcher": []
     },
@@ -53,6 +60,13 @@
         "-Command",
         "trellens generate-model 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest/c1tDMXSa.json' src/trellens/model.py"
       ],
+      "problemMatcher": []
+    },
+    {
+      "label": "proj: Generate schema",
+      "type": "process",
+      "command": "pwsh",
+      "args": ["-Command", "trellens generate-schema"],
       "problemMatcher": []
     },
 
