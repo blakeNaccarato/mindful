@@ -8,7 +8,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -220,12 +220,12 @@ class Prefs(BaseModel):
     is_template: bool = Field(..., alias="isTemplate")
     card_aging: str = Field(..., alias="cardAging")
     calendar_feed_enabled: bool = Field(..., alias="calendarFeedEnabled")
-    hidden_plugin_board_buttons: List = Field(..., alias="hiddenPluginBoardButtons")
-    switcher_views: List[SwitcherView] = Field(..., alias="switcherViews")
+    hidden_plugin_board_buttons: list = Field(..., alias="hiddenPluginBoardButtons")
+    switcher_views: list[SwitcherView] = Field(..., alias="switcherViews")
     background: str | None
     background_color: Any = Field(..., alias="backgroundColor")
     background_image: str = Field(..., alias="backgroundImage")
-    background_image_scaled: List[BackgroundImageScaledItem] = Field(
+    background_image_scaled: list[BackgroundImageScaledItem] = Field(
         ..., alias="backgroundImageScaled"
     )
     background_tile: bool = Field(..., alias="backgroundTile")
@@ -274,18 +274,18 @@ class LabelNames(BaseModel):
 
 class Card(BaseModel):
     id: str
-    name: Optional[str] = None
+    name: str | None = None
     id_short: int = Field(..., alias="idShort")
     short_link: str = Field(..., alias="shortLink")
-    desc: Optional[str] = None
-    pos: Optional[float] = None
-    id_labels: Optional[List[str]] = Field(None, alias="idLabels")
-    start: Optional[Optional[str]] = None
-    id_list: Optional[str] = Field(None, alias="idList")
-    closed: Optional[bool] = None
-    due_reminder: Optional[int] = Field(None, alias="dueReminder")
-    due: Optional[Optional[str]] = None
-    id_members: Optional[List[str]] = Field(None, alias="idMembers")
+    desc: str | None = None
+    pos: float | None = None
+    id_labels: list[str] | None = Field(None, alias="idLabels")
+    start: str | None | None = None
+    id_list: str | None = Field(None, alias="idList")
+    closed: bool | None = None
+    due_reminder: int | None = Field(None, alias="dueReminder")
+    due: str | None | None = None
+    id_members: list[str] | None = Field(None, alias="idMembers")
 
 
 class Prefs1(BaseModel):
@@ -296,7 +296,7 @@ class Board(BaseModel):
     id: str
     name: str
     short_link: str = Field(..., alias="shortLink")
-    prefs: Optional[Prefs1] = None
+    prefs: Prefs1 | None = None
 
 
 class Member(BaseModel):
@@ -307,15 +307,15 @@ class Member(BaseModel):
 class Attachment(BaseModel):
     id: str
     name: str
-    url: Optional[str] = None
-    preview_url: Optional[str] = Field(None, alias="previewUrl")
-    preview_url2x: Optional[str] = Field(None, alias="previewUrl2x")
+    url: str | None = None
+    preview_url: str | None = Field(None, alias="previewUrl")
+    preview_url2x: str | None = Field(None, alias="previewUrl2x")
 
 
 class ListModel(BaseModel):
     id: str
-    name: Optional[str] = None
-    pos: Optional[int] = None
+    name: str | None = None
+    pos: int | None = None
 
 
 class Prefs2(BaseModel):
@@ -323,21 +323,21 @@ class Prefs2(BaseModel):
 
 
 class Old(BaseModel):
-    desc: Optional[str] = None
-    pos: Optional[float] = None
-    id_labels: Optional[List[str]] = Field(None, alias="idLabels")
-    start: Optional[Optional[str]] = None
-    id_list: Optional[str] = Field(None, alias="idList")
-    closed: Optional[bool] = None
-    name: Optional[str] = None
-    due_reminder: Optional[Any] = Field(None, alias="dueReminder")
-    due: Optional[Optional[str]] = None
-    id_members: Optional[List[str]] = Field(None, alias="idMembers")
-    prefs: Optional[Prefs2] = None
+    desc: str | None = None
+    pos: float | None = None
+    id_labels: list[str] | None = Field(None, alias="idLabels")
+    start: str | None | None = None
+    id_list: str | None = Field(None, alias="idList")
+    closed: bool | None = None
+    name: str | None = None
+    due_reminder: Any | None = Field(None, alias="dueReminder")
+    due: str | None | None = None
+    id_members: list[str] | None = Field(None, alias="idMembers")
+    prefs: Prefs2 | None = None
 
 
 class TextData(BaseModel):
-    emoji: Dict[str, Any]
+    emoji: dict[str, Any]
 
 
 class Checklist(BaseModel):
@@ -346,7 +346,7 @@ class Checklist(BaseModel):
 
 
 class TextData1(BaseModel):
-    emoji: Dict[str, Any]
+    emoji: dict[str, Any]
 
 
 class CheckItem(BaseModel):
@@ -372,7 +372,7 @@ class Prefs3(BaseModel):
 
 class BoardSource(BaseModel):
     id: str
-    prefs: Optional[Prefs3] = None
+    prefs: Prefs3 | None = None
 
 
 class UsageBrackets(BaseModel):
@@ -400,25 +400,25 @@ class Plugin(BaseModel):
     id: str
     id_organization_owner: str = Field(..., alias="idOrganizationOwner")
     author: str
-    capabilities: List[str]
-    capabilities_options: List[str] = Field(..., alias="capabilitiesOptions")
-    categories: List[str]
+    capabilities: list[str]
+    capabilities_options: list[str] = Field(..., alias="capabilitiesOptions")
+    categories: list[str]
     iframe_connector_url: str = Field(..., alias="iframeConnectorUrl")
     name: str
     privacy_url: str = Field(..., alias="privacyUrl")
     public: bool
     moderated_state: Any = Field(..., alias="moderatedState")
     support_email: str = Field(..., alias="supportEmail")
-    tags: List[str]
+    tags: list[str]
     is_compliant_with_privacy_standards: Any = Field(
         ..., alias="isCompliantWithPrivacyStandards"
     )
     usage_brackets: UsageBrackets = Field(..., alias="usageBrackets")
-    claimed_domains: List[str] = Field(..., alias="claimedDomains")
+    claimed_domains: list[str] = Field(..., alias="claimedDomains")
     icon: Icon
     listing: Listing
-    hero_image_url: Optional[HeroImageUrl] = Field(None, alias="heroImageUrl")
-    url: Optional[str] = None
+    hero_image_url: HeroImageUrl | None = Field(None, alias="heroImageUrl")
+    url: str | None = None
 
 
 class BoardTarget(BaseModel):
@@ -431,25 +431,25 @@ class Organization(BaseModel):
 
 
 class Data(BaseModel):
-    id_member: Optional[str] = Field(None, alias="idMember")
-    card: Optional[Card] = None
+    id_member: str | None = Field(None, alias="idMember")
+    card: Card | None = None
     board: Board
-    member: Optional[Member] = None
-    attachment: Optional[Attachment] = None
-    list: Optional[ListModel] = None
-    old: Optional[Old] = None
-    text: Optional[str] = None
-    text_data: Optional[TextData] = Field(None, alias="textData")
-    date_last_edited: Optional[str] = Field(None, alias="dateLastEdited")
-    checklist: Optional[Checklist] = None
-    check_item: Optional[CheckItem] = Field(None, alias="checkItem")
-    list_before: Optional[ListBefore] = Field(None, alias="listBefore")
-    list_after: Optional[ListAfter] = Field(None, alias="listAfter")
-    deactivated: Optional[bool] = None
-    board_source: Optional[BoardSource] = Field(None, alias="boardSource")
-    plugin: Optional[Plugin] = None
-    board_target: Optional[BoardTarget] = Field(None, alias="boardTarget")
-    organization: Optional[Organization] = None
+    member: Member | None = None
+    attachment: Attachment | None = None
+    list: ListModel | None = None
+    old: Old | None = None
+    text: str | None = None
+    text_data: TextData | None = Field(None, alias="textData")
+    date_last_edited: str | None = Field(None, alias="dateLastEdited")
+    checklist: Checklist | None = None
+    check_item: CheckItem | None = Field(None, alias="checkItem")
+    list_before: ListBefore | None = Field(None, alias="listBefore")
+    list_after: ListAfter | None = Field(None, alias="listAfter")
+    deactivated: bool | None = None
+    board_source: BoardSource | None = Field(None, alias="boardSource")
+    plugin: Plugin | None = None
+    board_target: BoardTarget | None = Field(None, alias="boardTarget")
+    organization: Organization | None = None
 
 
 class Icon1(BaseModel):
@@ -458,8 +458,8 @@ class Icon1(BaseModel):
 
 class AppCreatorItem(BaseModel):
     id: str
-    name: Optional[str] = None
-    icon: Optional[Icon1] = None
+    name: str | None = None
+    icon: Icon1 | None = None
 
 
 class PerAction1(BaseModel):
@@ -525,11 +525,11 @@ class Action(BaseModel):
     id: str
     id_member_creator: str = Field(..., alias="idMemberCreator")
     data: Data
-    app_creator: Optional[AppCreatorItem] = Field(..., alias="appCreator")
+    app_creator: AppCreatorItem | None = Field(..., alias="appCreator")
     type: str
     date: str
-    limits: Optional[Limit]
-    member: Optional[Member1] = None
+    limits: Limit | None
+    member: Member1 | None = None
     member_creator: MemberCreator = Field(..., alias="memberCreator")
 
 
@@ -557,18 +557,18 @@ class Badges(BaseModel):
     description: bool
     due: Any
     due_complete: bool = Field(..., alias="dueComplete")
-    start: Optional[str]
+    start: str | None
 
 
 class DescData(BaseModel):
-    emoji: Dict[str, Any]
+    emoji: dict[str, Any]
 
 
 class Label(BaseModel):
     id: str
     id_board: str = Field(..., alias="idBoard")
     name: str
-    color: Optional[str]
+    color: str | None
 
 
 class PerCard3(BaseModel):
@@ -618,14 +618,14 @@ class ScaledItem(BaseModel):
 
 
 class Cover(BaseModel):
-    id_attachment: Optional[str] = Field(..., alias="idAttachment")
+    id_attachment: str | None = Field(..., alias="idAttachment")
     color: Any
     id_uploaded_background: Any = Field(..., alias="idUploadedBackground")
     size: str
     brightness: str
     id_plugin: Any = Field(..., alias="idPlugin")
-    scaled: Optional[List[ScaledItem]] = None
-    edge_color: Optional[str] = Field(None, alias="edgeColor")
+    scaled: list[ScaledItem] | None = None
+    edge_color: str | None = Field(None, alias="edgeColor")
 
 
 class Preview(BaseModel):
@@ -639,17 +639,17 @@ class Preview(BaseModel):
 
 
 class Attachment1(BaseModel):
-    bytes: Optional[int]
+    bytes: int | None
     date: str
-    edge_color: Optional[str] = Field(..., alias="edgeColor")
+    edge_color: str | None = Field(..., alias="edgeColor")
     id_member: str = Field(..., alias="idMember")
     is_upload: bool = Field(..., alias="isUpload")
     mime_type: str = Field(..., alias="mimeType")
     name: str
-    previews: List[Preview]
+    previews: list[Preview]
     url: str
     pos: int
-    file_name: Optional[str] = Field(..., alias="fileName")
+    file_name: str | None = Field(..., alias="fileName")
     id: str
 
 
@@ -676,17 +676,17 @@ class Card1(BaseModel):
     desc: str
     desc_data: DescData | None = Field(None, alias="descData")
     due: Any
-    due_reminder: Optional[int] = Field(..., alias="dueReminder")
+    due_reminder: int | None = Field(..., alias="dueReminder")
     email: str
     id_board: str = Field(..., alias="idBoard")
-    id_checklists: List[str] = Field(..., alias="idChecklists")
-    id_labels: List[str] = Field(..., alias="idLabels")
+    id_checklists: list[str] = Field(..., alias="idChecklists")
+    id_labels: list[str] = Field(..., alias="idLabels")
     id_list: str = Field(..., alias="idList")
-    id_members: List[str] = Field(..., alias="idMembers")
-    id_members_voted: List = Field(..., alias="idMembersVoted")
+    id_members: list[str] = Field(..., alias="idMembers")
+    id_members_voted: list = Field(..., alias="idMembersVoted")
     id_short: int = Field(..., alias="idShort")
-    id_attachment_cover: Optional[str] = Field(..., alias="idAttachmentCover")
-    labels: List[Label]
+    id_attachment_cover: str | None = Field(..., alias="idAttachmentCover")
+    labels: list[Label]
     limits: Limits1
     location_name: Any = Field(..., alias="locationName")
     manual_cover_attachment: bool = Field(..., alias="manualCoverAttachment")
@@ -695,22 +695,22 @@ class Card1(BaseModel):
     short_link: str = Field(..., alias="shortLink")
     short_url: str = Field(..., alias="shortUrl")
     static_map_url: Any = Field(..., alias="staticMapUrl")
-    start: Optional[str]
+    start: str | None
     subscribed: bool
     url: str
     cover: Cover
     is_template: bool = Field(..., alias="isTemplate")
     card_role: Any = Field(..., alias="cardRole")
-    attachments: List[Attachment1]
-    plugin_data: List[PluginDatum] = Field(..., alias="pluginData")
-    custom_field_items: List = Field(..., alias="customFieldItems")
+    attachments: list[Attachment1]
+    plugin_data: list[PluginDatum] = Field(..., alias="pluginData")
+    custom_field_items: list = Field(..., alias="customFieldItems")
 
 
 class Label1(BaseModel):
     id: str
     id_board: str = Field(..., alias="idBoard")
     name: str
-    color: Optional[str]
+    color: str | None
 
 
 class OpenPerList1(BaseModel):
@@ -763,14 +763,14 @@ class Member2(BaseModel):
     confirmed: bool
     full_name: str = Field(..., alias="fullName")
     id_enterprise: Any = Field(..., alias="idEnterprise")
-    id_enterprises_deactivated: List = Field(..., alias="idEnterprisesDeactivated")
+    id_enterprises_deactivated: list = Field(..., alias="idEnterprisesDeactivated")
     id_member_referrer: Any = Field(..., alias="idMemberReferrer")
-    id_prem_orgs_admin: List = Field(..., alias="idPremOrgsAdmin")
+    id_prem_orgs_admin: list = Field(..., alias="idPremOrgsAdmin")
     initials: str
     member_type: str = Field(..., alias="memberType")
     non_public: NonPublic2 = Field(..., alias="nonPublic")
     non_public_available: bool = Field(..., alias="nonPublicAvailable")
-    products: List
+    products: list
     url: str
     username: str
     status: str
@@ -791,7 +791,7 @@ class Limits3(BaseModel):
 
 
 class NameData(BaseModel):
-    emoji: Dict[str, Any]
+    emoji: dict[str, Any]
 
 
 class CheckItem1(BaseModel):
@@ -814,7 +814,7 @@ class Checklist1(BaseModel):
     pos: int
     limits: Limits3
     creation_method: Any = Field(..., alias="creationMethod")
-    check_items: List[CheckItem1] = Field(..., alias="checkItems")
+    check_items: list[CheckItem1] = Field(..., alias="checkItems")
 
 
 class Membership(BaseModel):
@@ -853,25 +853,25 @@ class Model(BaseModel):
     short_link: str = Field(..., alias="shortLink")
     subscribed: bool
     label_names: LabelNames = Field(..., alias="labelNames")
-    power_ups: List = Field(..., alias="powerUps")
+    power_ups: list = Field(..., alias="powerUps")
     date_last_activity: str = Field(..., alias="dateLastActivity")
     date_last_view: str = Field(..., alias="dateLastView")
     short_url: str = Field(..., alias="shortUrl")
-    id_tags: List = Field(..., alias="idTags")
+    id_tags: list = Field(..., alias="idTags")
     date_plugin_disable: Any = Field(..., alias="datePluginDisable")
     creation_method: Any = Field(..., alias="creationMethod")
     ix_update: str = Field(..., alias="ixUpdate")
     template_gallery: Any = Field(..., alias="templateGallery")
     enterprise_owned: bool = Field(..., alias="enterpriseOwned")
     id_board_source: str | None = Field(None, alias="idBoardSource")
-    premium_features: List[str] = Field(..., alias="premiumFeatures")
+    premium_features: list[str] = Field(..., alias="premiumFeatures")
     id_member_creator: str | None = Field(None, alias="idMemberCreator")
-    actions: List[Action]
-    cards: List[Card1]
-    labels: List[Label1]
-    lists: List[List1]
-    members: List[Member2]
-    checklists: List[Checklist1]
-    custom_fields: List = Field(..., alias="customFields")
-    memberships: List[Membership]
-    plugin_data: List[PluginDatum1] = Field(..., alias="pluginData")
+    actions: list[Action]
+    cards: list[Card1]
+    labels: list[Label1]
+    lists: list[List1]
+    members: list[Member2]
+    checklists: list[Checklist1]
+    custom_fields: list = Field(..., alias="customFields")
+    memberships: list[Membership]
+    plugin_data: list[PluginDatum1] = Field(..., alias="pluginData")
