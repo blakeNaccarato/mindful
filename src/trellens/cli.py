@@ -7,32 +7,19 @@ from datamodel_code_generator import InputFileType, PythonVersion, generate
 import pyperclip
 from typer import Typer
 
-from trellens.api import load_boards
+from trellens.defaults import boards
 
 app = Typer()
 
 
 @app.command()
-def generate_model(input_file: Path, output_file: Path):
-    """Generate data model from JSON file."""
-    generate(
-        input_file,
-        output=output_file,
-        input_file_type=InputFileType.Json,
-        snake_case_field=True,
-        target_python_version=PythonVersion.PY_311,
-    )
-
-
-@app.command()
 def get_comments(
-    boards: Path,
     board_name: str,
     card_name: str,
     limit_days: int = 0,
 ):
     """Get comments from a card."""
-    board = [board for board in load_boards(boards) if board.name == board_name][0]
+    board = [board for board in boards if board.name == board_name][0]
     comment_actions_data = [
         action for action in board.actions if action.type == "commentCard"
     ]
@@ -50,3 +37,19 @@ def get_comments(
         ]
     )
     pyperclip.copy("\n\n\n".join(filtered_comments))
+
+
+# * -------------------------------------------------------------------------------- * #
+# * BACKEND
+
+
+@app.command()
+def generate_model(input_file: Path, output_file: Path):
+    """Generate data model from JSON file."""
+    generate(
+        input_file,
+        output=output_file,
+        input_file_type=InputFileType.Json,
+        snake_case_field=True,
+        target_python_version=PythonVersion.PY_311,
+    )

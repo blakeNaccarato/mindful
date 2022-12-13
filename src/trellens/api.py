@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from trellens.model import Model
+from trellens.board import Model
 
 
 def load_boards(path: Path) -> list[Model]:

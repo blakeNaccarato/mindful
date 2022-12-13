@@ -41,7 +41,7 @@
       "command": "pwsh",
       "args": [
         "-Command",
-        "trellens get-comments 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest' '${input:board}' '${input:card}' --limit-days '${input:limit_days}'"
+        "trellens get-comments '${input:board}' '${input:card}' --limit-days '${input:limit_days}'"
       ],
       "problemMatcher": []
     },

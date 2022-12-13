@@ -5,3 +5,7 @@ more.
 """
 
 __version__ = "0.0.0"
+
+from trellens.config import init
+
+init()
