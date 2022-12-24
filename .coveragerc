@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = trellens
+source = mindful
 
 [report]
 

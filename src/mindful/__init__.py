@@ -6,6 +6,6 @@ more.
 
 __version__ = "0.0.0"
 
-from trellens.configs import init
+from mindful.configs import init
 
 init()

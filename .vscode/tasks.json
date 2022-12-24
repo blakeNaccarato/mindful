@@ -39,7 +39,7 @@
       "label": "proj: Generate report",
       "type": "process",
       "command": "pwsh",
-      "args": ["-Command", "trellens generate-report --days=7"],
+      "args": ["-Command", "mindful generate-report --days=7"],
       "problemMatcher": []
     },
     {
@@ -48,7 +48,7 @@
       "command": "pwsh",
       "args": [
         "-Command",
-        "trellens get-comments '${input:board}' '${input:card}' --days=${input:days}"
+        "mindful get-comments '${input:board}' '${input:card}' --days=${input:days}"
       ],
       "problemMatcher": []
     },
@@ -58,7 +58,7 @@
       "command": "pwsh",
       "args": [
         "-Command",
-        "trellens generate-model 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest/c1tDMXSa.json' src/trellens/model.py"
+        "mindful generate-model 'G:/My Drive/Blake/School/Grad/Time Tracking/Trello/JSON/Latest/c1tDMXSa.json' src/mindful/model.py"
       ],
       "problemMatcher": []
     },
@@ -66,7 +66,7 @@
       "label": "proj: Generate schema",
       "type": "process",
       "command": "pwsh",
-      "args": ["-Command", "trellens generate-schema"],
+      "args": ["-Command", "mindful generate-schema"],
       "problemMatcher": []
     },
 

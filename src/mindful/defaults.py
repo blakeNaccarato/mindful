@@ -3,8 +3,8 @@
 import json
 from pathlib import Path
 
-from trellens import board
-from trellens.configs import get_config
+from mindful import board
+from mindful.configs import get_config
 
 config = get_config()
 

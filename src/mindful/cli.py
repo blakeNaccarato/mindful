@@ -7,8 +7,8 @@ from datamodel_code_generator import InputFileType, PythonVersion, generate
 import pyperclip
 from typer import Typer
 
-from trellens import api, configs
-from trellens.defaults import boards, config
+from mindful import api, configs
+from mindful.defaults import boards, config
 
 app = Typer()
 

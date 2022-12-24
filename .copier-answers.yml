@@ -1,7 +1,7 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
 _commit: c08a4fb
 _src_path: gh:blakeNaccarato/copier-python
-github_repo_name: trellens
+github_repo_name: mindful
 include_funding: true
 override: true
 override_cicd_setup: false
@@ -21,8 +21,8 @@ override_vscode_extensions: false
 override_vscode_launch: false
 override_vscode_settings: false
 override_vscode_tasks: true
-project_email: blake.naccarato+trellens@gmail.com
-project_name: trellens
+project_email: blake.naccarato+mindful@gmail.com
+project_name: mindful
 project_owner_github_username: blakeNaccarato
 project_owner_name: blakeNaccarato
 python_version: "3.11"

@@ -1,5 +1,5 @@
 """Alternative entry to the CLI."""
 
-from trellens.cli import app
+from mindful.cli import app
 
 app()

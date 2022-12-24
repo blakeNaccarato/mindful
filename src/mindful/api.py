@@ -2,8 +2,8 @@
 
 from datetime import datetime, timedelta
 
-from trellens import board
-from trellens.times import end_of_today
+from mindful import board
+from mindful.times import end_of_today
 
 
 def agg_comments(comments: list[board.Action]) -> list[board.Action]:

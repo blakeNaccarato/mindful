@@ -1,11 +1,11 @@
-"""Configure trellens."""
+"""Configure mindful."""
 
 from pathlib import Path
 
 from pydantic import BaseModel, DirectoryPath, Extra, Field
 import tomllib
 
-APPDIR = Path("~/.trellens").expanduser()
+APPDIR = Path("~/.mindful").expanduser()
 
 
 def init():

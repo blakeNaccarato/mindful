@@ -4,7 +4,7 @@
 # Be sure to override .gitignore in the template questions before putting anything here.
 
 # For ignoring the symlinked local configuration directory
-.trellens
+.mindful
 
 ## * -------------------------------------------------------------------------------- * #
 # * TEMPLATE-SPECIFIC
